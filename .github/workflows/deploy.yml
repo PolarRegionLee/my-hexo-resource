@@ -28,6 +28,12 @@ jobs:
     - name: Generate static files
       run: yarn build
     
+    - name: Remove CNAME file if exists
+      run: |
+        if [ -f public/CNAME ]; then
+          rm public/CNAME
+        fi
+    
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
