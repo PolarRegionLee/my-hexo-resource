@@ -1,3 +1,21 @@
+# Site
+title: 随风浪敛，守拙求真
+subtitle: ''
+description: ''
+keywords:
+author: PolarRegionLee
+language: zh-CN
+timezone: Asia/Shanghai
+
+# URL
+url: https://polarregionlee.github.io
+root: /
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+pretty_urls:
+  trailing_index: true
+  trailing_html: true
+
 theme: typography
 
 highlight:

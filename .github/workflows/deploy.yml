@@ -28,6 +28,12 @@ jobs:
     - name: Generate static files
       run: yarn build
     
+    - name: Ensure no CNAME for github.io
+      run: |
+        if [ -f public/CNAME ]; then
+          rm public/CNAME
+        fi
+    
     - name: Deploy to polarregionlee.github.io
       uses: peaceiris/actions-gh-pages@v3
       with:
@@ -39,9 +45,11 @@ jobs:
         user_email: 'github-actions[bot]@users.noreply.github.com'
         commit_message: 'Deploy to github.io from ${{ github.repository }}@${{ github.sha }}'
     
-    - name: Prepare for blog.polarregionlee.com deployment
-      run: |
-        echo "blog.polarregionlee.com" > public/CNAME
+    - name: Re-generate static files for blog domain
+      run: yarn build
+    
+    - name: Create CNAME for blog.polarregionlee.com
+      run: echo "blog.polarregionlee.com" > public/CNAME
     
     - name: Deploy to blog.polarregionlee.com
       uses: peaceiris/actions-gh-pages@v3
