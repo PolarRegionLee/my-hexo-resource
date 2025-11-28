@@ -28,9 +28,6 @@ jobs:
     - name: Generate static files
       run: yarn build
     
-    - name: Create CNAME file
-      run: echo "blog.polarregionlee.com" > public/CNAME
-    
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
