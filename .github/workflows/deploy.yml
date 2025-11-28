@@ -28,13 +28,7 @@ jobs:
     - name: Generate static files
       run: yarn build
     
-    - name: Remove CNAME file if exists
-      run: |
-        if [ -f public/CNAME ]; then
-          rm public/CNAME
-        fi
-    
-    - name: Deploy to GitHub Pages
+    - name: Deploy to polarregionlee.github.io
       uses: peaceiris/actions-gh-pages@v3
       with:
         personal_token: ${{ secrets.DEPLOY_TOKEN }}
@@ -43,4 +37,19 @@ jobs:
         publish_branch: main
         user_name: 'github-actions[bot]'
         user_email: 'github-actions[bot]@users.noreply.github.com'
-        commit_message: 'Deploy from ${{ github.repository }}@${{ github.sha }}'
+        commit_message: 'Deploy to github.io from ${{ github.repository }}@${{ github.sha }}'
+    
+    - name: Prepare for blog.polarregionlee.com deployment
+      run: |
+        echo "blog.polarregionlee.com" > public/CNAME
+    
+    - name: Deploy to blog.polarregionlee.com
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        personal_token: ${{ secrets.DEPLOY_TOKEN }}
+        publish_dir: ./public
+        external_repository: polarregionlee/blog
+        publish_branch: main
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'
+        commit_message: 'Deploy to blog.polarregionlee.com from ${{ github.repository }}@${{ github.sha }}'
